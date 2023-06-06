@@ -9,6 +9,19 @@ export type MarketData = {
   quoteVolume: string;
 };
 
+export type RecentTrade = {
+  id: number;
+  price: string;
+  qty: string;
+  quoteQty: string;
+  time: number;
+};
+
+export type Data = {
+  marketData: MarketData;
+  recentTrades: RecentTrade[];
+};
+
 async function fetchMarketData(pair: string) {
   const url = new URL('https://api.binance.com/api/v3/ticker/24hr');
   url.searchParams.set('symbol', pair);
@@ -16,8 +29,16 @@ async function fetchMarketData(pair: string) {
   return response.json();
 }
 
-export function useMarketData() {
-  const [data, setData] = useState<MarketData>();
+async function fetchRecentTrades(pair: string) {
+  const url = new URL('https://api.binance.com/api/v3/trades');
+  url.searchParams.set('symbol', pair);
+  url.searchParams.set('limit', '100');
+  const response = await fetch(url);
+  return response.json();
+}
+
+export function useData() {
+  const [data, setData] = useState<Data>();
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
 
@@ -26,8 +47,10 @@ export function useMarketData() {
     setError(false);
     setLoading(true);
 
-    fetchMarketData(pair)
-      .then((data) => setData(data))
+    Promise.all([fetchMarketData(pair), fetchRecentTrades(pair)])
+      .then(([marketData, recentTrades]) =>
+        setData({ marketData, recentTrades })
+      )
       .catch(() => setError(true))
       .finally(() => setLoading(false));
   }

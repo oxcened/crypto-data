@@ -1,9 +1,9 @@
 import Form from './components/Form/Form.tsx';
-import { useMarketData } from '@/hooks/useMarketData.ts';
+import { useData } from '@/hooks/useData.ts';
 import PairData from '@/components/PairData/PairData.tsx';
 
 export default function App() {
-  const { data, isLoading, isError, fetch } = useMarketData();
+  const { data, isLoading, isError, fetch } = useData();
 
   return (
     <main className="px-4 py-6 lg:py-10 max-w-md mx-auto">
