@@ -6,8 +6,8 @@ export default function App() {
   const { data, isLoading, isError, fetch, sortRecentTrades, sort } = useData();
 
   return (
-    <>
-      <main className="px-4 py-6 lg:py-10 max-w-md mx-auto">
+    <div className="min-h-screen flex flex-col">
+      <main className="px-4 py-6 lg:py-10 max-w-md mx-auto flex-1">
         <h1 className="text-4xl text-center">Welcome to CryptoData 👋</h1>
         <p className="text-xl mt-3 text-center">
           Please select a pair and hit the button.
@@ -29,6 +29,6 @@ export default function App() {
       <footer className="text-center pb-10 text-sm">
         Made with ❤️ by Alen
       </footer>
-    </>
+    </div>
   );
 }
