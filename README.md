@@ -71,7 +71,7 @@ Because I had limited time to do this there are certain things that I would have
 
 ## License
 
-This project is MIT licensed.
+This project is [MIT licensed](./LICENSE).
 
 ---
 
