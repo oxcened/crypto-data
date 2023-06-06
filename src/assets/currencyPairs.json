@@ -1,0 +1,14 @@
+[
+  {
+    "baseSymbol": "BTC",
+    "quoteSymbol": "USDT"
+  },
+  {
+    "baseSymbol": "ETH",
+    "quoteSymbol": "USDT"
+  },
+  {
+    "baseSymbol": "DOGE",
+    "quoteSymbol": "USDT"
+  }
+]
