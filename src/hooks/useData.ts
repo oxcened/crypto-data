@@ -45,12 +45,18 @@ async function fetchMarketData(pair: string): Promise<MarketData> {
   };
 }
 
-async function fetchRecentTrades(pair: string) {
+async function fetchRecentTrades(pair: string): Promise<RecentTrade[]> {
   const url = new URL('https://api.binance.com/api/v3/trades');
   url.searchParams.set('symbol', pair);
   url.searchParams.set('limit', '100');
   const response = await fetch(url);
-  return response.json();
+  const json = await response.json();
+
+  return json.map((trade: any) => ({
+    ...trade,
+    time: new Date(trade.time).toLocaleTimeString(),
+    price: priceFormatter.format(parseFloat(trade.price)),
+  }));
 }
 
 export function useData() {

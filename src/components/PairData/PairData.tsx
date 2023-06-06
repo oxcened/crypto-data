@@ -26,11 +26,11 @@ export default function PairData({
       <div className="border p-4 mt-5">
         <p>Recent trades (up to 100)</p>
 
-        <table className="mt-5 text-left">
+        <table className="w-full mt-5 text-left text-sm">
           <thead>
             <tr>
               <th>Time</th>
-              <th>Price</th>
+              <th>Price (USDT)</th>
               <th>Quantity</th>
             </tr>
           </thead>
