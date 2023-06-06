@@ -3,7 +3,7 @@ import { useData } from '@/hooks/useData.ts';
 import PairData from '@/components/PairData/PairData.tsx';
 
 export default function App() {
-  const { data, isLoading, isError, fetch } = useData();
+  const { data, isLoading, isError, fetch, sortRecentTrades, sort } = useData();
 
   return (
     <main className="px-4 py-6 lg:py-10 max-w-md mx-auto">
@@ -16,7 +16,13 @@ export default function App() {
 
       {isLoading && 'Loading, please wait...'}
       {isError && 'Ouch, an error occurred! Please try again.'}
-      {data && <PairData data={data} />}
+      {data && (
+        <PairData
+          data={data}
+          sort={sort}
+          onSortRecentTrades={sortRecentTrades}
+        />
+      )}
     </main>
   );
 }
