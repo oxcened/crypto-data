@@ -1,5 +1,6 @@
 import { Data, RecentTradeSortField } from '@/hooks/useData.ts';
 import { HTMLProps } from 'react';
+import { priceFormatter } from '@/utils/formatters.ts';
 
 function TableHeader({
   sortDir,
@@ -86,8 +87,8 @@ export default function PairData({
           <tbody className="font-mono">
             {recentTrades.map((trade) => (
               <tr key={trade.id}>
-                <td>{trade.time}</td>
-                <td>{trade.price}</td>
+                <td>{new Date(trade.time).toLocaleTimeString()}</td>
+                <td>{priceFormatter.format(trade.price)}</td>
                 <td>{trade.qty}</td>
               </tr>
             ))}

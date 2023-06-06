@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { percentFormatter, priceFormatter } from '@/utils/formatters.ts';
 
 export type MarketData = {
   symbol: string;
@@ -24,15 +25,6 @@ export type Data = {
   marketData: MarketData;
   recentTrades: RecentTrade[];
 };
-
-const priceFormatter = new Intl.NumberFormat('en-US', {
-  maximumFractionDigits: 2,
-});
-
-const percentFormatter = new Intl.NumberFormat('en-US', {
-  style: 'percent',
-  maximumFractionDigits: 2,
-});
 
 async function fetchMarketData(pair: string): Promise<MarketData> {
   const url = new URL('https://api.binance.com/api/v3/ticker/24hr');
