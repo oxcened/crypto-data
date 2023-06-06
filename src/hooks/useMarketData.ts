@@ -19,19 +19,23 @@ async function fetchMarketData(pair: string) {
 export function useMarketData() {
   const [data, setData] = useState<MarketData>();
   const [isLoading, setLoading] = useState(false);
+  const [isError, setError] = useState(false);
 
   function fetch(pair: string) {
+    setData(undefined);
+    setError(false);
     setLoading(true);
 
-    fetchMarketData(pair).then((data) => {
-      setData(data);
-      setLoading(false);
-    });
+    fetchMarketData(pair)
+      .then((data) => setData(data))
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
   }
 
   return {
     data,
     isLoading,
+    isError,
     fetch,
   };
 }

@@ -20,7 +20,10 @@ export default function Form({ isLoading, onSubmit }: FormProps) {
   };
 
   return (
-    <form className="flex justify-center gap-5 mt-5" onSubmit={handleSubmit}>
+    <form
+      className="flex justify-center gap-5 mt-5 mb-8"
+      onSubmit={handleSubmit}
+    >
       <select
         className="border-2 border-black p-2"
         value={pair}
@@ -47,7 +50,7 @@ export default function Form({ isLoading, onSubmit }: FormProps) {
         }`}
         disabled={isSubmitDisabled}
       >
-        {isFormInvalid ? 'First choose a pair' : 'Get the data!'}
+        {isFormInvalid ? 'Choose a pair first' : 'Get the data!'}
       </button>
     </form>
   );
