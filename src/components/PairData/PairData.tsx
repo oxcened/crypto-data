@@ -13,13 +13,13 @@ export default function PairData({
         <p>Currency Pair</p>
         <p className="font-mono">{marketData.symbol}</p>
 
-        <p>Price</p>
+        <p>Price (USDT)</p>
         <p className="font-mono">{marketData.lastPrice}</p>
 
-        <p>Change</p>
+        <p>24H Change</p>
         <p className="font-mono">{marketData.priceChangePercent}</p>
 
-        <p>24H Volume</p>
+        <p>24H Volume (USDT)</p>
         <p className="font-mono">{marketData.quoteVolume}</p>
       </div>
 

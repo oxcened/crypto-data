@@ -2,10 +2,8 @@ import { useState } from 'react';
 
 export type MarketData = {
   symbol: string;
-  lastPrice: string;
+  lastPrice: number;
   priceChangePercent: string;
-  highPrice: string;
-  openPrice: string;
   quoteVolume: string;
 };
 
@@ -22,11 +20,29 @@ export type Data = {
   recentTrades: RecentTrade[];
 };
 
-async function fetchMarketData(pair: string) {
+const priceFormatter = new Intl.NumberFormat('en-US', {
+  maximumFractionDigits: 2,
+});
+
+const percentFormatter = new Intl.NumberFormat('en-US', {
+  style: 'percent',
+  maximumFractionDigits: 2,
+});
+
+async function fetchMarketData(pair: string): Promise<MarketData> {
   const url = new URL('https://api.binance.com/api/v3/ticker/24hr');
   url.searchParams.set('symbol', pair);
   const response = await fetch(url);
-  return response.json();
+  const json = await response.json();
+
+  return {
+    ...json,
+    lastPrice: priceFormatter.format(parseFloat(json.lastPrice)),
+    priceChangePercent: percentFormatter.format(
+      parseFloat(json.priceChangePercent) / 100
+    ),
+    quoteVolume: priceFormatter.format(parseFloat(json.quoteVolume)),
+  };
 }
 
 async function fetchRecentTrades(pair: string) {
