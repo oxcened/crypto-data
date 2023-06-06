@@ -1,25 +1,30 @@
 import currencyPairs from '@/assets/currencyPairs.json';
-import { ChangeEventHandler, FormEventHandler } from 'react';
+import { FormEventHandler, useState } from 'react';
 
 export type FormProps = {
-  isSubmitDisabled: boolean;
-  pairValue: string;
-  onPairValueChange: ChangeEventHandler<HTMLSelectElement>;
-  onSubmit: FormEventHandler<HTMLFormElement>;
+  isLoading: boolean;
+  onSubmit: (pair: string) => void;
 };
 
-export default function Form({
-  isSubmitDisabled,
-  pairValue,
-  onPairValueChange,
-  onSubmit,
-}: FormProps) {
+export default function Form({ isLoading, onSubmit }: FormProps) {
+  const [pair, setPair] = useState<string>('');
+  const isFormInvalid = !pair;
+  const isSubmitDisabled = isFormInvalid || isLoading;
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    if (!isSubmitDisabled) {
+      onSubmit(pair);
+    }
+  };
+
   return (
-    <form className="flex justify-center gap-5 mt-5" onSubmit={onSubmit}>
+    <form className="flex justify-center gap-5 mt-5" onSubmit={handleSubmit}>
       <select
         className="border-2 border-black p-2"
-        value={pairValue}
-        onChange={onPairValueChange}
+        value={pair}
+        onChange={(e) => setPair(e.target.value)}
       >
         <option value="">Select a pair</option>
 
@@ -42,7 +47,7 @@ export default function Form({
         }`}
         disabled={isSubmitDisabled}
       >
-        Get the data!
+        {isFormInvalid ? 'First choose a pair' : 'Get the data!'}
       </button>
     </form>
   );
