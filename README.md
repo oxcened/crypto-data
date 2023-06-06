@@ -25,7 +25,7 @@ Check out the demo [here](https://crypto-data-eta.vercel.app/).
 
 * Select a pair of currencies between BTC, ETH and DOGE
 * Click the button and get updated info about price, 24 change and 24 volume.
-* Check also a list of the 100 most recent trades as well
+* Check a list of the 100 most recent trades as well
 * Sort the table by clicking on the headers of the table
 * Fully responsive
 * Renders whether there's an error from the APIs
