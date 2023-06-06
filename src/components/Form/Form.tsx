@@ -2,18 +2,18 @@ import currencyPairs from '@/assets/currencyPairs.json';
 import { ChangeEventHandler, FormEventHandler } from 'react';
 
 export type FormProps = {
+  isSubmitDisabled: boolean;
   pairValue: string;
   onPairValueChange: ChangeEventHandler<HTMLSelectElement>;
   onSubmit: FormEventHandler<HTMLFormElement>;
 };
 
 export default function Form({
+  isSubmitDisabled,
   pairValue,
   onPairValueChange,
   onSubmit,
 }: FormProps) {
-  const isSubmitDisabled = !pairValue;
-
   return (
     <form className="flex justify-center gap-5 mt-5" onSubmit={onSubmit}>
       <select
@@ -42,7 +42,7 @@ export default function Form({
         }`}
         disabled={isSubmitDisabled}
       >
-        {isSubmitDisabled ? 'Choose pair first' : 'Get the data!'}
+        Get the data!
       </button>
     </form>
   );
