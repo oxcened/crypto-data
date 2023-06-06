@@ -15,7 +15,7 @@
   <a href="#license">License</a>
 </p>
 
-![screenshot](./.git/screenshot.png)
+![screenshot](./screenshot.png)
 
 ## Demo
 
