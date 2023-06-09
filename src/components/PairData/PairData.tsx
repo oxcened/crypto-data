@@ -1,4 +1,8 @@
-import { Data, RecentTradeSortField } from '@/hooks/useData.ts';
+import {
+  MarketData,
+  RecentTrade,
+  RecentTradeSortField,
+} from '@/hooks/useData.ts';
 import { HTMLProps } from 'react';
 import { priceFormatter } from '@/utils/formatters.ts';
 
@@ -12,7 +16,7 @@ function TableHeader({
   let sortIcon = undefined;
 
   if (sortDir) {
-    sortIcon = sortDir === 'asc' ? <>&darr;</> : <>&uarr;</>;
+    sortIcon = sortDir === 'desc' ? <>&darr;</> : <>&uarr;</>;
   }
 
   return (
@@ -24,13 +28,15 @@ function TableHeader({
 }
 
 export type PairDataProps = {
-  data: Data;
+  marketData: MarketData;
+  recentTrades: RecentTrade[];
   sort?: [RecentTradeSortField, 'asc' | 'desc'];
   onSortRecentTrades: (field: RecentTradeSortField) => void;
 };
 
 export default function PairData({
-  data: { marketData, recentTrades },
+  marketData,
+  recentTrades,
   sort,
   onSortRecentTrades,
 }: PairDataProps) {

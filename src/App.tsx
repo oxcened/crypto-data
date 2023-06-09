@@ -1,9 +1,11 @@
 import Form from './components/Form/Form.tsx';
 import { useData } from '@/hooks/useData.ts';
 import PairData from '@/components/PairData/PairData.tsx';
+import useSort from '@/hooks/useSort.ts';
 
 export default function App() {
-  const { data, isLoading, isError, fetch, sortRecentTrades, sort } = useData();
+  const { data, isLoading, isError, fetch } = useData();
+  const { data: sorted, sort, handleSort } = useSort(data?.recentTrades);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -17,11 +19,12 @@ export default function App() {
 
         {isLoading && 'Loading, please wait...'}
         {isError && 'Ouch, an error occurred! Please try again.'}
-        {data && (
+        {data && sorted && (
           <PairData
-            data={data}
+            marketData={data.marketData}
+            recentTrades={sorted}
             sort={sort}
-            onSortRecentTrades={sortRecentTrades}
+            onSortRecentTrades={handleSort}
           />
         )}
       </main>
